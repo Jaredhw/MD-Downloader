@@ -1,8 +1,8 @@
 # Tested using Win 10 Pro - 1809 & Python 3.8.1 32-bit 
+# It's highly suggested you use a Python3 >= Version 3.4 so PIP is bundled. 
 
 #Enables debug output
 DEBUG = False
-
 
 print("MangaDex Webscraping tool by @SeveralDogs")
 
@@ -12,17 +12,20 @@ import sys
 import json
 import os
 
+# Attempts to install dependencies using pip through Windows commandline calls
+# It may require seting Python up in windows PATH
 try:
     from bs4 import BeautifulSoup 
-except ModuleNotFoundError:  #Install pip if it's not installed. May require adding python to PATH on Windows.    
+except ModuleNotFoundError:  #Install BS4 if it's not installed.
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'beautifulsoup4']) 
     from bs4 import beautifulsoup4
 try:
     import lxml
-except ModuleNotFoundError:    
+except ModuleNotFoundError:  #Installs lxml if not already installed
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'lxml']) 
     import lxml
 
+#Prints information about the current dependencies to the console
 if DEBUG == True:
     print("---- LXML INFORMATION ----")
     subprocess.check_call([sys.executable, '-m', 'pip', 'show', 'lxml']) 
@@ -31,13 +34,17 @@ if DEBUG == True:
 
 
 # Checks the current directory for files and stores all ".html" files into a list
-print("HTML Files Detected: ")
+print("Checking .py file directory for .HTML files, NOTE: Does not search subdirectories")
+
 htmlFiles = []
 files = [f for f in os.listdir('.') if os.path.isfile(f)]
 for f in files:
     # only move the file forward if it ends with .html
     if f.lower().endswith(('.html')) == True:
         htmlFiles.append(f)
+
+# Prints information about files found to the console
+print("HTML Files Detected: ")
 for htmlFile in htmlFiles:
   print(htmlFile)       
 
