@@ -4,7 +4,6 @@
 #Enables debug output
 DEBUG = False
 mangaList = []
-print("MangaDex Webscraping tool by @SeveralDogs")
 # Attempts to import or install then import dependencies
 import subprocess
 import sys
